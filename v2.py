@@ -87,7 +87,7 @@ class MutliHeadAttention(nn.Module):
         out = torch.cat([h(x) for h in self.heads], dim=-1)
         out = self.proj(out)
         return out
-        
+
 class FeedForward(nn.Module):
     """ a simple linear layer followed by a non linearity"""
     def __init__(self, n_embd):
@@ -95,6 +95,7 @@ class FeedForward(nn.Module):
         self.net = nn.Sequential(
             nn.Linear(n_embd, n_embd),
             nn.ReLU(),
+            nn.Linear(n_embd, n_embd),
         )
 
     def forward(self,x):
