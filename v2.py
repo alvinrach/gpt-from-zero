@@ -73,7 +73,7 @@ class Head(nn.Module):
         k = self.key(x)
         q = self.query(x)
         # compute attention scores ("affinities")
-        wei = q @ k.transpose(-2,-1) * C**-0.5
+        wei = q @ k.transpose(-2,-1) * k.shape[-1]**-0.5
         wei = wei.masked_fill(self.tril[:T, :T] == 0, float('-inf'))
         wei = F.softmax(wei, dim=-1)
         wei = self.dropout(wei)
