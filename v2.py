@@ -205,7 +205,7 @@ for iter in range(max_iters):
     optimizer.step()
 
 # generate from the model
-context = torch.zeros([1,1], dtype=torch.long, device=device)
+context = torch.tensor([encode("Let us kill him, and we'll have corn")], dtype=torch.long, device=device)
 print(decode(m.generate(context, max_new_tokens=500)[0].tolist()))
 open('more.txt', 'w').write(decode(m.generate(context, max_new_tokens=10000)[0].tolist()))
 
